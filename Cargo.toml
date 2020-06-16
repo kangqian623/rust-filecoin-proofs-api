@@ -1,16 +1,16 @@
 [package]
-name = "filecoin-proofs-api"
+name = "filecoin_proofs-api"
 version = "4.0.1-alpha.0"
 description = "API to interact with the proofs system in Filecoin"
 authors = ["dignifiedquire <me@dignifiedquire.com>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/filecoin-project/rust-filecoin-proofs-api"
+repository = "https://github.com/filecoin-project/rust-filecoin_proofs-api"
 readme = "README.md"
 
 [dependencies]
 anyhow = "1.0.26"
 serde = "1.0.104"
 paired = "0.19.0"
-#filecoin-proofs-v1 = { package = "filecoin-proofs", version = "4.0.0"}
+#filecoin_proofs-v1 = { package = "filecoin_proofs", version = "4.0.0"}
 filecoin-proofs = { git = "https://github.com/kangqian623/rust-fil-proofs" }

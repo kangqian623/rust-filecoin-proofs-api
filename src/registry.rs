@@ -1,10 +1,10 @@
 use std::path::PathBuf;
 
 use anyhow::{ensure, Result};
-use filecoin_proofs_v1::types::{
+use filecoin_proofs::types::{
     MerkleTreeTrait, PoRepConfig, PoRepProofPartitions, PoStConfig, PoStType, SectorSize,
 };
-use filecoin_proofs_v1::{constants, with_shape};
+use filecoin_proofs::{constants, with_shape};
 use serde::{Deserialize, Serialize};
 
 /// Available seal proofs.
@@ -95,7 +95,7 @@ impl RegisteredSealProof {
 
         match self {
             StackedDrg2KiBV1 | StackedDrg8MiBV1 | StackedDrg512MiBV1 | StackedDrg32GiBV1
-            | StackedDrg64GiBV1 => filecoin_proofs_v1::SINGLE_PARTITION_PROOF_LEN,
+            | StackedDrg64GiBV1 => filecoin_proofs::SINGLE_PARTITION_PROOF_LEN,
         }
     }
 
@@ -160,7 +160,7 @@ impl RegisteredSealProof {
         match self.version() {
             Version::V1 => {
                 let id = self.circuit_identifier()?;
-                let params = filecoin_proofs_v1::constants::PARAMETERS.get(&format!("{}.vk", &id));
+                let params = filecoin_proofs::constants::PARAMETERS.get(&format!("{}.vk", &id));
                 ensure!(params.is_some(), "missing params for {}", &id);
 
                 Ok(params.unwrap().cid.clone())
@@ -173,7 +173,7 @@ impl RegisteredSealProof {
             Version::V1 => {
                 let id = self.circuit_identifier()?;
                 let params =
-                    filecoin_proofs_v1::constants::PARAMETERS.get(&format!("{}.params", &id));
+                    filecoin_proofs::constants::PARAMETERS.get(&format!("{}.params", &id));
                 ensure!(params.is_some(), "missing params for {}", &id);
 
                 Ok(params.unwrap().cid.clone())
@@ -274,7 +274,7 @@ impl RegisteredPoStProof {
 
     pub fn single_partition_proof_len(self) -> usize {
         match self.version() {
-            Version::V1 => filecoin_proofs_v1::SINGLE_PARTITION_PROOF_LEN,
+            Version::V1 => filecoin_proofs::SINGLE_PARTITION_PROOF_LEN,
         }
     }
 
@@ -359,7 +359,7 @@ impl RegisteredPoStProof {
         match self.version() {
             Version::V1 => {
                 let id = self.circuit_identifier()?;
-                let params = filecoin_proofs_v1::constants::PARAMETERS.get(&format!("{}.vk", &id));
+                let params = filecoin_proofs::constants::PARAMETERS.get(&format!("{}.vk", &id));
                 ensure!(params.is_some(), "missing params for {}", &id);
 
                 Ok(params.unwrap().cid.clone())
@@ -372,7 +372,7 @@ impl RegisteredPoStProof {
             Version::V1 => {
                 let id = self.circuit_identifier()?;
                 let params =
-                    filecoin_proofs_v1::constants::PARAMETERS.get(&format!("{}.params", &id));
+                    filecoin_proofs::constants::PARAMETERS.get(&format!("{}.params", &id));
                 ensure!(params.is_some(), "missing params for {}", &id);
 
                 Ok(params.unwrap().cid.clone())
